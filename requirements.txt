@@ -1,0 +1,9 @@
+Flask
+Flask-BS4
+Flask-SeaSurf
+Flask-Sitemap
+Flask-WTF
+WTForms
+dnspython
+flask-log-request-id
+uwsgi

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Statement{% endblock %}
+
+
+{% block page_content %}
+
+<div class="row justify-content-md-center">
+  <div class="col col-md-8">
+
+	<div class="card mt-3">
+	  <div class="card-header">
+		<h1 id="privacy-statement">Privacy Statement</h1>
+	  </div>
+	  <div class="card-body text-left">
+		<p>Responsible for the protection of personal data is:</p>
+
+		<div>
+			<pre class="mark">Enrico Tröger
+eMail: enrico [dot] troeger [at] uvena.de
+PGP Key: 51A0 918F EF34 3906 6BEB  87F4 5793 47E6 C71A 77FA</pre>
+		</div>
+
+		<p>This website can be used without providing any personal data.</p>
+		<p>This site does not use any kind of tracking, Google Analytics, Facebookpixel or similar.<br>
+		Search queries on the page generate a log entry.</p>
+
+		<h2 id="server-log-files">Server log files</h2>
+
+		<p>The website operator collects data about access to the site and stores it<br>
+		as "server log files". The following data is logged:</p>
+		<ul>
+			<li>Visited website</li>
+			<li>Time of access</li>
+			<li>Amount of data sent in bytes</li>
+			<li>Source / reference from which you came to the page</li>
+			<li>Used browser</li>
+			<li>Used operating system</li>
+			<li>Used IP address</li>
+		</ul>
+
+		<p>This data is only stored for error detection and debugging purposes.
+		There is no evaluation or linkage of this data with other sources.<br>
+		Server log files get deleted automatically after 60 days.</p>
+
+		<h2 id="cookies">Cookies</h2>
+
+		<p>This website sets one single cookie named "csrf_token".<br>
+		The "CSRF" protection cookie helps to prevent Cross-site request forgery
+		attacks and expires at the end of the browser session (i.e. when the browser
+		is closed). This cookie does <b>not</b> contain any personal data but only
+		a randomly generated character string.
+		</p>
+
+		<h2 id="information-blocking-deletion">Information, Blocking, Deletion</h2>
+
+		<p>You have the right to request information about all your personal data which we store, its origin,
+		recipients and the purpose of data processing.</p>
+		<p>Furthermore, you have the right to request rectification, blocking and deletion of all your personal data.</p>
+		<p>For such requests a proof of identity is needed, best to send a PGP encrypted email to us,
+		find address and PGP key further up on this page.</p>
+
+	  </div>
+	</div>
+
+{% endblock %}

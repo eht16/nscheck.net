@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Glue Record Lookup{% endblock %}
+
+{% block page_content %}
+
+    <div class="row justify-content-md-center">
+      <div class="col col-md-8">
+
+        <div class="card mt-3">
+          <div class="card-header">
+            <h1>Glue Record Lookup</h1>
+            Query
+            <a href="https://en.wikipedia.org/wiki/Domain_Name_System#Circular_dependencies_and_glue_records">
+                glue records
+            </a> for a domain.
+          </div>
+          <div class="card-body">
+            <form action="{{ url_for('dns.gluerecords') }}" method="post" class="form-inline justify-content-center" role="form">
+                {{ form.csrf_token }}
+
+                <div class="input-group form-group mx-sm-2">
+                    <div class="input-group-prepend">
+                        <input
+                            class="btn btn-outline-secondary"
+                            type="reset"
+                            value="X"
+                            onclick="var domain_name=$('#domain_name');domain_name[0].defaultValue='';domain_name.val([]);domain_name.focus();">
+                    </div>
+                    {{ form.domain_name(size=50, pattern=domain_name_validation_regex, class="form-control", placeholder="Domain name") }}
+                </div>
+                <input class="btn btn-primary" type="submit" value="Lookup">
+            </form>
+          </div>
+        </div>
+
+        {% if result %}
+            <div class="card mt-5">
+              <div class="card-header">
+                <h3>
+                    Glue records for {{ form.domain_name.data|lower }}
+                </h3>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive-md">
+                  <table class="table table-striped table-bordered">
+                     <tbody>
+                        {% for nameserver, ip_addresses in result.glue_records.items() %}
+                            <tr>
+                              <th scope="row" class="text-right">{{ nameserver }}:</th>
+                              <td>
+                                  {{ ip_addresses|join(', ') }}
+                              </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                              <td scope="row" colspan="2">No glue records found</td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        {% endif %}
+      </div>
+    </div>
+{% endblock %}
