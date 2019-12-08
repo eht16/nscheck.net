@@ -35,7 +35,19 @@ First you should install the requirements, ideally in a virtualenv:
 
 ### Run in production
 
+#### Uwsgi
+
 	venv/bin/uwsgi --master --processes 4 --manage-script-name --mount /=nscheck:wsgi
+
+#### Docker
+
+Build the image:
+
+	docker build -t nscheck.net .
+
+Start container:
+
+	docker run --rm -p 8000:8000 --name nscheck.net nscheck.net:latest
 
 
 ## License
