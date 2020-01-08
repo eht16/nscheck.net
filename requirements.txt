@@ -1,6 +1,5 @@
 Flask
 Flask-BS4
-Flask-SeaSurf
 Flask-Sitemap
 Flask-WTF
 WTForms
