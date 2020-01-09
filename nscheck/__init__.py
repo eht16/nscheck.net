@@ -6,32 +6,17 @@
 import logging
 import logging.config
 
-from flask import current_app, Flask, render_template
+from flask import Flask
 from flask.logging import default_handler
 from flask_bs4 import Bootstrap
 from flask_log_request_id import parser, RequestID
 from flask_sitemap import Sitemap
-from flask_wtf.csrf import CSRFError, CSRFProtect
+from flask_wtf.csrf import CSRFProtect
 from werkzeug.exceptions import NotFound
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from nscheck import views
 from nscheck.session import DummySessionInterface
-
-
-def _error_handler(exc):
-    # raise all exceptions in debug mode
-    if current_app.debug:
-        raise exc
-    # log
-    current_app.logger.exception('An error occurred: {}'.format(exc))
-    # response
-    if isinstance(exc, NotFound):
-        return render_template('error_404.html', e=exc), 404
-    if isinstance(exc, CSRFError):
-        return render_template('error_csrf.html', e=exc), 400
-
-    return render_template('error_500.html', e=exc), 500
 
 
 # ----------------------------------------------------------------------
@@ -62,8 +47,8 @@ def create_app():
     app.add_url_rule('/', 'home', redirect_to='dns/reversedns')
 
     # error handlers
-    app.register_error_handler(NotFound, _error_handler)
-    app.register_error_handler(Exception, _error_handler)
+    app.register_error_handler(NotFound, views.error_handler)
+    app.register_error_handler(Exception, views.error_handler)
 
     # add CSRF protection
     CSRFProtect(app)

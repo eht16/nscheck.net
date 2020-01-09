@@ -4,6 +4,8 @@
 # of the MIT license.  See the LICENSE file for details.
 
 from flask import Blueprint, current_app, flash, render_template
+from flask_wtf.csrf import CSRFError
+from werkzeug.exceptions import NotFound
 
 from nscheck.dns.gluerecords import GlueRecordResolver
 from nscheck.dns.reversedns import ReverseDnsResolver
@@ -102,3 +104,19 @@ def set_response_headers(response):
     response.headers['X-Content-Type-Options'] = 'nosniff'
     response.headers['X-XSS-Protection'] = '1; mode=block'
     return response
+
+
+# ----------------------------------------------------------------------
+def error_handler(exc):
+    # raise all exceptions in debug mode
+    if current_app.debug:
+        raise exc
+    # log
+    current_app.logger.exception('An error occurred: {}'.format(exc))
+    # response
+    if isinstance(exc, NotFound):
+        return render_template('error_404.html', e=exc), 404
+    if isinstance(exc, CSRFError):
+        return render_template('error_csrf.html', e=exc), 400
+
+    return render_template('error_500.html', e=exc), 500
