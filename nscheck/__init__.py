@@ -58,9 +58,3 @@ def create_app():
     Sitemap(app)
 
     return app
-
-
-# ----------------------------------------------------------------------
-def wsgi(*args, **kwargs):
-    app = create_app()
-    return app(*args, **kwargs)

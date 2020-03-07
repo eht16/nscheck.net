@@ -37,7 +37,7 @@ First you should install the requirements, ideally in a virtualenv:
 
 #### Uwsgi
 
-	venv/bin/uwsgi --master --processes 4 --manage-script-name --mount /=nscheck:wsgi
+	venv/bin/uwsgi --master --processes 4 --manage-script-name --mount /=nscheck:create_app()
 
 #### Docker
 

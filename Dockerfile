@@ -63,6 +63,6 @@ CMD [ \
         "--http", "0.0.0:8000", \
         "--processes", "4", \
         "--manage-script-name", \
-        "--mount", "/=nscheck:wsgi" \
+        "--mount", "/=nscheck:create_app()" \
 ]
 EXPOSE 8000
