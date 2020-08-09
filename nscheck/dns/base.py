@@ -85,7 +85,7 @@ class DnsBase:
                 ecs_rr = dict()
                 ecs_rr['class'] = 'IN'
                 ecs_rr['type'] = dns.rdatatype.to_text(record.rdtype)
-                ecs_rr['data'] = record.items[0].to_text() if record.items else None
+                ecs_rr['data'] = self._get_ip_address_from_record(record)
                 ecs_rr['ttl'] = record.ttl
                 answers.append(ecs_rr)
                 if record.rdtype in DNS_IP_RDTYPES:
@@ -100,6 +100,13 @@ class DnsBase:
             exc = None  # do not log traceback for common, expected errors
 
         self._logger.log(level, message, extra=extra, exc_info=exc)
+
+    # ----------------------------------------------------------------------
+    def _get_ip_address_from_record(self, record):
+        if record.items and len(record.items) == 1:
+            item_keys = list(record.items.keys())
+            item_key = item_keys[0]
+            return item_key.to_text()
 
     # ----------------------------------------------------------------------
     def _factor_nameserver_list(self, nameserver_names):

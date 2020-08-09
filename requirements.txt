@@ -3,6 +3,6 @@ Flask-BS4
 Flask-Sitemap
 Flask-WTF
 WTForms
-dnspython
+dnspython>=2.0
 flask-log-request-id
 uwsgi
