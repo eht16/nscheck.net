@@ -19,17 +19,17 @@
             <form action="{{ url_for('dns.gluerecords') }}" method="post" class="form-inline justify-content-center" role="form">
                 {{ form.csrf_token }}
 
-                <div class="input-group form-group mx-sm-2">
+                <div class="input-group mb-3 mx-sm-2">
                     <div class="input-group-prepend">
                         <input
                             class="btn btn-outline-secondary"
                             type="reset"
                             value="X"
-                            onclick="var domain_name=$('#domain_name');domain_name[0].defaultValue='';domain_name.val([]);domain_name.focus();">
+                            onclick="var domain_name=document.getElementById('domain_name');domain_name.defaultValue='';domain_name.focus();">
                     </div>
                     {{ form.domain_name(size=50, pattern=domain_name_validation_regex, class="form-control", placeholder="Domain name") }}
                 </div>
-                <input class="btn btn-primary" type="submit" value="Lookup">
+                <button type="submit" class="btn btn-primary">Lookup</button>
             </form>
           </div>
         </div>
@@ -47,7 +47,7 @@
                      <tbody>
                         {% for nameserver, ip_addresses in result.glue_records.items() %}
                             <tr>
-                              <th scope="row" class="text-right">{{ nameserver }}:</th>
+                              <th scope="row" class="text-end">{{ nameserver }}:</th>
                               <td>
                                   {{ ip_addresses|join(', ') }}
                               </td>

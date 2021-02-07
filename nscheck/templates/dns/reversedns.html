@@ -23,17 +23,17 @@ suits for a basic validation. Full validation is done in the backend.
             <form action="{{ url_for('dns.reversedns') }}" method="post" class="form-inline justify-content-center" role="form">
                 {{ form.csrf_token }}
 
-                <div class="input-group form-group mx-sm-2">
-                    <div class="input-group-prepend">
-                        <input
-                            class="btn btn-outline-secondary"
-                            type="reset"
-                            value="X"
-                            onclick="var ip_address=$('#ip_address');ip_address[0].defaultValue='';ip_address.val([]);ip_address.focus();">
-                    </div>
-                    {{ form.ip_address(size=50, pattern=ip_validation_regex, class="form-control", placeholder="IP address") }}
-                </div>
-                <input class="btn btn-primary" type="submit" value="Lookup">
+                <div class="input-group mb-3 mx-sm-2">
+                  <div class="input-group-prepend">
+                      <input
+                          class="btn btn-outline-secondary"
+                          type="reset"
+                          value="X"
+                          onclick="var ip_address=document.getElementById('ip_address');ip_address.defaultValue='';ip_address.focus();">
+                  </div>
+                  {{ form.ip_address(size=50, pattern=ip_validation_regex, class="form-control", placeholder="IP address") }}
+              </div>
+              <button type="submit" class="btn btn-primary">Lookup</button>
             </form>
           </div>
         </div>
@@ -51,13 +51,13 @@ suits for a basic validation. Full validation is done in the backend.
                      <tbody>
                         {% for ptr in reverse_dns.ptrs %}
                             <tr>
-                              <th scope="row" class="text-right">PTR:</th>
+                              <th scope="row" class="text-end">PTR:</th>
                               <td>{{ ptr }}</td>
                             </tr>
                         {% endfor %}
                         {% for nameserver in reverse_dns.nameservers %}
                             <tr>
-                              <th scope="row" class="text-right">Authoritative name server:</th>
+                              <th scope="row" class="text-end">Authoritative name server:</th>
                               <td>
                                   {{ nameserver.nameserver }}
                                   <br>
@@ -66,7 +66,7 @@ suits for a basic validation. Full validation is done in the backend.
                             </tr>
                         {% else %}
                             <tr>
-                              <th scope="row" class="text-right">Authoritative name server:</th>
+                              <th scope="row" class="text-end">Authoritative name server:</th>
                               <td>None found</td>
                             </tr>
                         {% endfor %}
