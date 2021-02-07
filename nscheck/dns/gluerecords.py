@@ -74,7 +74,7 @@ class GlueRecordResolver(DnsBase):
             for record in response.response.additional:
                 if record.rdtype in (dns.rdatatype.A, dns.rdatatype.AAAA):
                     nameserver_name = record.name.to_text()
-                    nameserver_ip_address = record.items[0].address
+                    nameserver_ip_address = self._get_ip_address_from_record(record)
                     nameserver_ip_addresses = glue_records.setdefault(nameserver_name, list())
                     nameserver_ip_addresses.append(nameserver_ip_address)
 
